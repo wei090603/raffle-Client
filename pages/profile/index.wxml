@@ -1,0 +1,46 @@
+<!--pages/profile/index.wxml-->
+<view class='container'>
+  <view class='mine'>
+    <view class='mine_info'>
+      <view class='mine_info_left'>
+        <view class='user_avatar_url'>
+          
+          <open-data class="" type="userAvatarUrl"></open-data>
+        </view>
+        <view class='user_avatar_name'>
+          <open-data type="userNickName"></open-data>
+        </view>        
+      </view>
+      <view class='mine_info_right_arrow'>
+        <image class='mine_info_right' src='/images/right-arrow.png'></image>
+      </view>
+    </view>
+  </view>
+  
+  <navigator url='/pages/profile/myActive/index' >
+    <view class='mine_body'>
+      <view class='mine_body_in'>
+        <view>
+          我参与的活动
+        </view>
+        <view class='mine_info_right_arrow'>
+          <image class='mine_info_right' src='/images/right-arrow.png'></image>
+        </view>
+      </view>
+    </view>
+  </navigator>
+  
+  <view class='mine_body top_border'>
+    <navigator target="miniProgram" path="pages/index/index?ald_media_id=1826&ald_link_key=8e947fa90c9a90ba&ald_position_id=0" app-id='wx0ade9fe6fbeaa89c'>
+      <view class='mine_body_in'>
+        <view>
+          更多好玩推荐
+        </view>
+        <view class='mine_info_right_arrow'>
+          <image class='mine_info_right' src='/images/right-arrow.png'></image>
+        </view>
+      </view>
+    </navigator>
+    
+  </view>
+</view>

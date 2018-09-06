@@ -1,0 +1,6 @@
+<!--pages/raffle/detail/detail.wxml-->
+<view class="container" wx:if="{{ loadingComplete }}">
+  
+  <image class="intro-image" src="{{ url }}" mode="widthFix"></image>
+</view>
+<loading wx:else></loading>

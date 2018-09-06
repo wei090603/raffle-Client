@@ -1,0 +1,21 @@
+<view class='container' wx:if="{{ loadingComplete }}">
+  <view class='my_raffle'>
+    <view class='my_raffle_in'  wx:for="{{ list }}" wx:key="item.id" bindtap="handleNavigateToRaffle" data-id="{{ item.id }}" >
+      <view class='my_raffle_left'>
+        {{ item.title }}
+      </view>
+      <view class='my_raffle_right'>
+        <view class='my_raffle_date'>
+          {{ item.joinAt }}
+        </view>
+        <view class='my_raffle_image'>
+          <image class='my_raffle_' src='/images/right-arrow.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='load_more'>
+    <view bindtap='{{ !stopLoad ? "show_more" : "" }}' hidden="{{ total == list.length }}">{{ showMore }}</view>
+  </view>
+</view>
+<loading wx:else></loading>

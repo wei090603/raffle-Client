@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "loading": "../../../components/loading/index"
+  },
+  "navigationBarTitleText": "抽奖详情",
+  "enablePullDownRefresh": false,
+  "backgroundColor": "#87235c"
+}

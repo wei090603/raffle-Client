@@ -1,0 +1,226 @@
+<view class="container" wx:if="{{ loadingComplete }}">
+  <view class="top-wrap">
+    <navigator class="back" url="../list" open-type="switchTab">更多活动</navigator>
+    <view class="rule" bindtap="toogleRule">活动规则</view>
+  </view>
+  <view class="header-wrap">
+    <image class="header-image" src="{{ raffle.headerUrl }}"></image>
+  </view>
+  <!-- 用户砍价状态 -->
+  <view class="status-container">
+    <block wx:if="{{ raffle.status == 0 }}">
+      <view class="status">
+        <view class="status-value">抽奖尚未开始</view>
+      </view>
+    </block>
+    <block wx:if="{{ raffle.status == 1 }}">
+      <block wx:if="{{ bargainRecords.length >= benefit.bargainSteps.length }}">
+        <view class="status-value">您已抽奖成功</view>
+      </block>
+      <block wx:else>
+        <view class="status">
+          <view class="status-item">
+            <text class="status-label">参与人数</text>
+            <text class="status-value">{{ gamblerCount }}</text>
+          </view>
+          <view class="status-item center">
+            <text class="status-label">抽奖码已发放</text>
+            <text class="status-value">{{ codeTotalCount }}</text>
+          </view>
+          <view class="status-item">
+            <text class="status-label">ta的抽奖码</text>
+            <text class="status-value">{{ masterTickets.length }}</text>
+          </view>
+        </view>
+      </block>
+    </block>
+    <block wx:if="{{ raffle.status == 2 }}">
+      <view class="status">
+        <view class="status-value">抽奖活动已经结束啦~去首页看看其他活动吧</view>
+        
+        
+      </view>
+      <view class='winner-list-info'>
+        <view class="winner-list"  wx:for="{{ winnerListLoad }}" wx:key="{{ item.code }}">
+          <view class="winner-image">
+            <image class="winner-user-image" src="{{ item.avatarUrl }}"/>
+          </view>
+          <view class="winner-user-nickname">
+            <view class="winner-user-nicknames">{{ item.nickName }}</view>
+          </view>
+          <view class="winner-user-code">{{ item.code }}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 获奖概况 -->
+  <view class="winner-container">
+    <view class="winner-header-list">
+      <image wx:for="{{ gamblerList }}" wx:for-item="headerImage" wx:key="*this"
+        class="winner-header" 
+        src="{{headerImage}}">
+      </image>
+    </view>
+    <view class="winner-survey">
+      <text>已参加抽奖的用户</text>
+      <navigator class="show-more" url="../photoWall/index?raffle={{ raffle._id }}">查看全部</navigator>
+    </view>
+  </view>
+  <!-- 操作区域 -->
+  <view class="action-container">
+    <block wx:if="{{ raffle.status == 0 }}">
+      <navigator class="action-button" url="../list" open-type="switchTab">
+        <view class="action-button-content">
+          <text>更多活动</text>
+        </view>
+      </navigator>
+    </block>
+    <block wx:if="{{ raffle.status == 1 }}">
+      <block>
+        <!-- 未完成砍价 -->
+        <block wx:if="{{ isHelp.length > 0 }}">
+          <!-- 已助力 -->
+          <view class="action-tips">
+            您已成功送ta一个抽奖码
+          </view>
+          <navigator class="action-button" open-type="redirect" url="/pages/raffle/join/join?raffle={{ raffle._id }}">
+            <view class="action-button-content">
+              <text>我也要拿</text>
+            </view>
+          </navigator>
+        </block>
+        <block wx:else>
+          <!-- 未助力 -->
+          <view class="action-tips">
+            每邀请1位好友，即可获取1个抽奖码
+            
+          </view>
+          <button class="action-button" bindtap="helpBargain">
+            <view class="action-button-content">
+              <text>送ta一个抽奖码</text>
+            </view>
+          </button>
+        </block>
+      </block>
+      
+    </block>
+    <block wx:if="{{ raffle.status == 2 }}">
+      <!-- <navigator class="action-button" url="../list" open-type="switchTab">
+        <view class="action-button-content">
+          <text>更多活动</text>
+        </view>
+      </navigator> -->
+      <block wx:if="{{ isWinner.length == 0 }}">
+        <navigator class="action-button" url="../list" open-type="switchTab">
+        <view class="action-button-content">
+          <text class="active">更多活动</text>
+        </view>
+      </navigator>
+        
+      </block>
+      <block wx:else>
+        <view class="action-tips">
+          恭喜您成功中奖
+        </view>
+        <button id="seek-help" class="action-button" open-type="contact">
+          <view class="action-button-content">
+            <text>{{ raffle.autoReply }}</text>
+          </view>
+        </button>
+      </block>
+    </block>
+  </view>
+  <!-- 好友送码榜 -->
+  <view class="bargain-container">
+    <view class="title">好友送码榜</view>
+    <block wx:if="{{ myRaffleCode.length > 0}}">
+      <block wx:for="{{ myRaffleCode }}" wx:key="*this">
+        <view class="bargain-info">
+          <image class="avatar" src="{{ item.bettor.avatarUrl }}"></image>
+          <view class="nickname">{{ item.bettor.nickName }}</view>
+          <view style="flex-grow: 1"></view>
+          <view class="bargain">送码：{{item.code}}</view>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <view class="bargain-info-empty">
+        <text>暂无好友送码</text>
+      </view>
+    </block>
+    <view class="show-more" bindtap="handleShowMore"
+      wx:if="{{ raffle.status == 1 }}">查看更多></view>
+  </view>
+  <button bindgetuserinfo="getUserInfo" class="get-user-info-button" openType="getUserInfo" wx:if="{{ !hasUserInfo && canIUse }}">
+  </button>
+</view>
+<loading wx:else></loading>
+<!-- 规则弹出框 -->
+<view catchtap="toogleRule" catchtouchmove="catchmove" class="intro-mask" wx:if="{{ showRule }}">
+  <view catchtap="toogleRule" class="intro-container">
+    <label class="intro-title">活动规则</label>
+    <scroll-view class="rule-content" scroll-y>
+      <rich-text nodes="{{ruleRichText}}" style="margin:20rpx;"></rich-text>
+    </scroll-view>
+    <button catchtap="toogleRule" class="intro-confirm">我知道了</button>
+  </view>
+</view>
+<!-- 抽奖 -->
+<view class="intro-mask" wx:if="{{ showBargainModal }}">
+  <view class="bargain-model-container">
+    <view class="message-section">
+      <text>赞!</text>
+      <text>成功送ta一个抽奖码</text>
+    </view>
+    <view class="tip-section">
+      <text>您也可以免费参加活动哦!</text>
+    </view>
+    <button catchtap="handleJoinBenefit" class="bargain-confirm">我也要参加</button>
+  </view>
+</view>
+<!-- 错误提示 -->
+<view class="intro-mask" wx:if="{{ showBargainErrorModal }}">
+  <view class="bargain-model-container">
+    <view class="message-section">
+      <text>{{bargainErrorMsg}}</text>
+    </view>
+    <view class="tip-section">
+      <text wx:if="{{ bargainErrorMsg == '好友已领取' }}">您也可以立即参加活动哦!</text>
+      <text wx:else>去首页看看其他福利活动吧</text>
+    </view>
+    <button wx:if="{{ bargainErrorMsg == '好友已领取' }}" catchtap="handleJoinBenefit" class="bargain-confirm">我也要拿</button>
+    <button wx:else catchtap="handleShowBenefits" class="bargain-confirm">看看更多活动</button>
+  </view>
+</view>
+
+<wxs module="m2">
+    var getBargainedPrice = function(benefit, rafffleRecordApi) {
+      var bargainCount = rafffleRecordApi.length;
+      if(bargainCount >= benefit.bargainSteps.length) {
+        
+        return benefit.giftFullPrice;
+      } else {
+        var bargainedPrice = 0;
+        for(var i = 0; i < bargainCount; i++) {
+          bargainedPrice += benefit.bargainSteps[i];
+        }
+        return bargainedPrice;
+      }
+    }
+    
+    var limitBargainRecords = function(benefit, rafffleRecordApi) {
+      var limit = benefit.bargainSteps.length;
+      if(rafffleRecordApi.length > limit) {
+        var records = [];
+        for(var i = 0; i < limit; i++) {
+          records.push(rafffleRecordApi[i]);
+        }
+        return records;
+      } else {
+        return rafffleRecordApi;
+      }
+    }
+    
+    module.exports.getBargainedPrice = getBargainedPrice;
+    module.exports.limitBargainRecords = limitBargainRecords;
+</wxs>

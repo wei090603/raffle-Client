@@ -1,0 +1,18 @@
+<view class="container" wx:if="{{ loadingComplete }}">
+  <view class='photo_wall'>
+    <view class='photo_wall_count'>
+      {{ total }}位参与者
+    </view>
+    <view class='photo_wall_list'>
+      <image class='image' wx:for="{{ list }}" wx:key="{{ item }}" src="{{ item }}"></image>
+    </view>
+    
+  </view>
+  <view>
+    <view class='load_more' >
+      <view  bindtap="{{ loadsWitch?'handleShowMore':'' }}" hidden="{{ total == list.length }}" >{{ showMore }}</view>
+    </view>
+  </view>
+</view>
+
+<loading wx:else></loading>

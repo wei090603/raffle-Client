@@ -1,0 +1,54 @@
+/* pages/profile/myActive/index.wxss */
+.my_raffle{
+  margin-top: 40rpx;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.my_raffle_in{
+  width: 710rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.my_raffle_{
+  width: 35rpx;
+  height: 30rpx;
+}
+.my_raffle_right{
+  width : 150rpx;
+  font-size:26rpx;
+  height:100%;
+  color: #adadad;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.my_raffle_date{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.my_raffle_image{
+  width: 35rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.load_more{
+  width: 100%;
+  height: 110rpx;
+  color: #0066CC;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

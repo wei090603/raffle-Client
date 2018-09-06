@@ -1,0 +1,74 @@
+/* pages/profile/index.wxss */
+.mine{
+  width: 100%;
+  height: 180rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content : center; 
+}
+.user_avatar_url{
+  height:90rpx;
+  width:90rpx;
+  border-radius:50%;
+  overflow:hidden;
+
+}
+.mine_body{
+  width:100%;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+.mine_info{
+  width: 710rpx;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items : center;
+}
+.mine_info_left{
+  display: flex;
+  flex-direction: row;
+  width: 400rpx;
+  height: 90rpx;
+  justify-content : flex-start;
+}
+.mine_info_right{
+  width: 30rpx;
+  height: 35rpx;
+}
+.user_avatar_name{
+  margin-left: 20rpx;
+  height: 100%;
+  display: flex;
+  flex-direction : column;
+  justify-content : center;
+  width:290rpx;
+  overflow: hidden;
+
+}
+.mine_info_right_arrow{
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mine_body_in{
+  width: 710rpx;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.top_border{
+  border: 1rpx solid #eee;
+}
